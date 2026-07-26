@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAMMA MIA — Workshop on Automata and Infinite-State Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#dfffff;
+    --ink:#1C1B19;
+    --ink-soft:#4B4A46;
+    --rule:#D8D5CD;
+    --main-title:#e9de47;  
+    --accent: #2E4A62; 
+    --accent-soft:#e7edf1;
+  }
+
+  *{box-sizing:border-box;}
+
+  html{-webkit-font-smoothing:antialiased;}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+  }
+
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    padding:5rem 1.5rem 6rem;
+  }
+
+  .logo-slot{
+    display:flex;
+    justify-content:center;
+    margin-bottom:3.5rem;
+  }
+  .logo-box{
+    width:96px;
+    height:96px;
+    border:1px solid var(--rule);
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--ink-soft);
+    background:#fff;
+  }
+  .logo-box svg{ width:56px; height:56px; display:block; }
+  .logo-caption{
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-top:0.6rem;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    text-align:center;
+    margin-bottom:3rem;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 0.9rem;
+  }
+
+
+  h1{
+    font-family:'IBM Plex Serif', serif;
+    font-weight:600;
+    font-size:3.1rem;
+    letter-spacing:0.02em;
+    margin:0 0 0.6rem;
+    color:var(--main-title);
+  }
+  .subtitle{
+    font-family:'IBM Plex Serif', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:1em;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  hr.rule{
+    border:none;
+    border-top:1px solid var(--rule);
+    margin:3rem 0;
+  }
+
+  /* ---------- Section headings ---------- */
+  h2{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 1.3rem;
+    display:flex;
+    align-items:center;
+    gap:0.75rem;
+  }
+  h2::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--rule);
+  }
+
+  section{ margin-bottom:3.2rem; }
+
+  /* ---------- About ---------- */
+  .about p{
+    font-size:1.02rem;
+    color:var(--ink);
+    max-width:62ch;
+    text-align: justify;
+    align-content: center;
+  }
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.5rem 2rem;
+    margin-top:1.4rem;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1rem;
+    color:var(--ink-soft);
+  }
+  .meta-row span b{
+    color:var(--ink);
+    font-weight:500;
+  }
+
+  /* ---------- Schedule ---------- */
+  .day-label{
+    font-family:'IBM Plex Serif', serif;
+    font-weight:600;
+    font-size:1.05rem;
+    margin:1.6rem 0 0.8rem;
+  }
+  .day-label:first-of-type{ margin-top:0; }
+
+
+
+  table.schedule{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.95rem;
+
+  }
+  table.schedule td{
+    padding:0.62rem 0.5rem;
+    border-top:1px solid var(--rule);
+    vertical-align:top;
+  }
+  table.schedule tr:last-child td{
+    border-bottom:1px solid var(--rule);
+  }
+  td.time{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    color:var(--accent);
+    white-space:nowrap;
+    width:8.5rem;
+  }
+  td.item .item-title{
+    color:var(--ink);
+  }
+  td.item .item-note{
+    display:block;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    margin-top:0.15rem;
+  }
+  tr.break td{ color:var(--ink-soft); }
+  tr.break td.item .item-title{ font-style:italic; color:var(--ink-soft); }
+
+  .schedule-note{
+    margin-top:1rem;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Participants ---------- */
+  ul.participants{
+    list-style:none;
+    margin:0;
+    padding:0;
+    columns:2;
+    column-gap:2.5rem;
+  }
+  ul.participants li{
+    break-inside:avoid;
+    padding:0.55rem 0;
+    border-top:1px solid var(--rule);
+    font-size:0.97rem;
+  }
+  ul.participants li:first-child{ border-top:1px solid var(--rule); }
+  .p-name{ color:var(--ink); }
+  .p-aff{
+    display:block;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    margin-top:0.1rem;
+  }
+
+  @media (max-width: 520px){
+    h1{ font-size:2.2rem; }
+    ul.participants{ columns:1; }
+    .page{ padding:3.5rem 1.25rem 4rem; }
+  }
+
+  footer{
+    margin-top:4rem;
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Logo placeholder -->
+  <div class="logo-slot">
+    <div>
+      <div class="logo-box", role="img" aria-label="MAMMA MIA logo">
+        <img src="logo-ce.png" alt="MAMMA MIA logo" height="192"/>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <p class="subtitle"><b>M</b>ethods and <b>A</b>utomata for <b>M</b>athematical <b>M</b>odels with <b>A</b>rbitrarily <b>M</b>any <b>I</b>nteracting <b>A</b>gents</p>
+  </header>
+
+<div class="meta-row">
+      <span><b>Part of <a href="https://highlights-conference.org/2026/crew/">Highlights CREW</a></b></span>
+
+    </div>
+
+<div class="meta-row">
+      <span><b>Dates</b> — September 14-18, 2026</span>
+      <span><b>Venue</b> — ISTA, Vienna, Austria</span>
+    </div>
+
+    <div class="meta-row">
+      <span><b>Registration for the workshop is not required, but you should register to <a href="https://highlights-conference.org/2026/crew/">Highlights CREW</a></b> to benefit from meals and other amenities.</span>
+
+    </div>
+
+<section class="rule"></section>
+
+  <section class="about">
+    <h2>About</h2>
+    <p>
+      MAMMA MIA brings together researchers working on automata theory, with a particular focus on abstraction of infinite-state systems. 
+      The workshop is organized around short talks and extended discussion, with an emphasis on open problems,
+      ongoing work, and the connections between logic, automata, and formal
+      methods. The programme is deliberately compact, leaving ample time for
+      questions and informal exchange between sessions.
+    </p>
+    
+  </section>
+
+  <section class="schedule">
+    <h2>Schedule</h2>
+
+    <b>TBA</b> — The week will start with introductions and a session of open problems.
+    The rest of the week will mostly consist of working groups gathering around those problems.
+
+    <!-- The schedule below is provisional and may be adjusted closer to the event. 
+    <div class="day-label">Day 1</div>
+    <table class="schedule">
+      <tr>
+        <td class="time">09:00 – 09:30</td>
+        <td class="item"><span class="item-title">Welcome, opening remarks and presentation of the participants</span></td>
+      </tr>
+      <tr>
+        <td class="time">09:30 – 12:00</td>
+        <td class="item">
+          <span class="item-title">Open problem session</span>
+        </td>
+      </tr>
+      <tr class="break">
+        <td class="time">12:45 – 14:00</td>
+        <td class="item"><span class="item-title">Lunch</span></td>
+      </tr>
+      <tr>
+        <td class="time">14:00 – 15:30</td>
+        <td class="item">
+          <span class="item-title">Contributed talks — session II</span>
+          <span class="item-note">Well-structured and infinite-state systems</span>
+        </td>
+      </tr>
+      <tr class="break">
+        <td class="time">15:30 – 16:00</td>
+        <td class="item"><span class="item-title">Coffee break</span></td>
+      </tr>
+      <tr>
+        <td class="time">16:00 – 17:00</td>
+        <td class="item"><span class="item-title">Open problems session</span></td>
+      </tr>
+    </table>
+
+    <div class="day-label">Day 2</div>
+    <table class="schedule">
+      <tr>
+        <td class="time">09:30 – 10:30</td>
+        <td class="item">
+          <span class="item-title">Invited talk</span>
+          <span class="item-note">Speaker to be announced</span>
+        </td>
+      </tr>
+      <tr class="break">
+        <td class="time">10:30 – 11:00</td>
+        <td class="item"><span class="item-title">Coffee break</span></td>
+      </tr>
+      <tr>
+        <td class="time">11:00 – 12:30</td>
+        <td class="item">
+          <span class="item-title">Contributed talks — session III</span>
+          <span class="item-note">Logic and decidability</span>
+        </td>
+      </tr>
+      <tr class="break">
+        <td class="time">12:30 – 14:00</td>
+        <td class="item"><span class="item-title">Lunch</span></td>
+      </tr>
+      <tr>
+        <td class="time">14:00 – 15:00</td>
+        <td class="item"><span class="item-title">Panel discussion</span></td>
+      </tr>
+      <tr>
+        <td class="time">15:00 – 15:15</td>
+        <td class="item"><span class="item-title">Closing remarks</span></td>
+      </tr>
+    </table>
+
+    <p class="schedule-note">Timings are provisional and may be adjusted closer to the event.</p>-->
+  </section>
+
+<!--  <section class="participants">
+    <h2>Confirmed participants</h2>
+    <ul class="participants">
+      <li><span class="p-name">Participant name</span><span class="p-aff">Affiliation</span></li>
+      <li><span class="p-name">Participant name</span><span class="p-aff">Affiliation</span></li>
+      <li><span class="p-name">Participant name</span><span class="p-aff">Affiliation</span></li>
+      <li><span class="p-name">Participant name</span><span class="p-aff">Affiliation</span></li>
+      <li><span class="p-name">Participant name</span><span class="p-aff">Affiliation</span></li>
+      <li><span class="p-name">Participant name</span><span class="p-aff">Affiliation</span></li>
+      <li><span class="p-name">Participant name</span><span class="p-aff">Affiliation</span></li>
+      <li><span class="p-name">Participant name</span><span class="p-aff">Affiliation</span></li>
+    </ul>
+    <p class="schedule-note">List updated as registrations are confirmed.</p>
+  </section>
+  -->
+
+<section class="about">
+    <h2>Organisers</h2>
+    Corto Mascle - cmascle[at]mpi-sws.org - <a href="https://corto-mascle.github.io/">webpage</a><br>
+    Isa Vialard - vialard[at]mpi-sws.org - <a href="https://isavialard.github.io/home/">webpage</a><br>
+    <p class="schedule-note">For any questions regarding the workshop, please contact the organisers.</p>
+    
+  </section>
+
+  <footer>
+    MAMMA MIA — Workshop on Automata and Infinite-State Systems
+  </footer>
+
+</div>
+</body>
+</html>
