@@ -20,10 +20,16 @@ body
 {
     margin: 0;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: transparent;
+    background-color: #D2F1E4;
+    background-image: linear-gradient(rgba(210, 241, 228,0.87),rgba(210, 241, 228,0.84)), url("Images/Tree-silhouette.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .columns
@@ -35,7 +41,13 @@ body
     max-width: 90rem;
     margin: 0 auto;
     padding: 1.5rem clamp(1rem, 3vw, 3rem);
-    flex: 1 0 auto;
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.columns.single-column-page
+{
+    grid-template-columns: minmax(0, 1fr);
 }
 
 
@@ -43,6 +55,7 @@ body
 {
     align-self: center;
     margin-top: 0.5rem;
+    max-width: 80%;
 }
 
 
@@ -88,32 +101,28 @@ h2
 
 header
 {
-    background-color: black;
+    background-color: #514663;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0 2rem;
-    justify-content: space-around;
-    padding: 0.5rem clamp(1rem, 3vw, 3rem);
+    color: white;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+    width: 15rem;
+    min-height: 100vh;
+    padding: 1.25rem 1rem 1.5rem;
+    grid-column: 1;
+    grid-row: 1 / 3;
 }
 
-footer
-{
-    background-color: black;
-    color: azure;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 1rem clamp(1rem, 3vw, 3rem);
-    margin-top: auto;
-    width: 100%;
-}
+
 
 .nomlabo
 {
-    color: aliceblue;
+    color: #ffffff;
+    display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .papertitle
@@ -148,6 +157,7 @@ footer
 }
 
 .publication-links a,
+.talk-list a,
 .abstract-toggle
 {
     display: inline-flex;
@@ -165,6 +175,7 @@ footer
 }
 
 .publication-links a:hover,
+.talk-list a:hover,
 .abstract-toggle:hover
 {
     background: #eaf4f7;
@@ -193,10 +204,22 @@ footer
     background: #eaf4f7;
 }
 
+.talk-list a
+{
+    margin-top: 0.5rem;
+}
+
 header a
 {
     color:white;
     text-decoration: none;
+}
+
+header nav
+{
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
 }
 
 a 
@@ -217,32 +240,30 @@ a:hover
  font-weight:bold; 
 }
 
+header nav a
+{
+    display: block;
+    padding: 0.75rem 0.875rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    text-align: left;
+}
+
 header ul
 {
     font-size: x-large;
     display: flex;
-    flex-direction:row;
-    flex-wrap: wrap;
-    gap: 0.25rem 1.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
     padding: 0;
-}
-
-header nav
-{
-    min-width: 0;
-    max-width: 100%;
-}
-
-header nav a
-{
-    display: inline-block;
-    padding: 0.625rem 0;
+    margin: 0;
 }
 
 header ul a:hover
 {
     color: black;
-    background-color: white;    
+    background-color: white;
 }
 
 ul
@@ -259,7 +280,8 @@ ul
     margin: 1.5rem 0;
 }
 
-.publication-item
+.publication-item,
+.talk-list > li
 {
     display: flex;
     align-items: flex-start;
@@ -271,6 +293,17 @@ ul
     border-radius: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     padding: 1rem 1.25rem;
+}
+
+.talk-list > li
+{
+    display: block;
+    margin: 0;
+}
+
+.talk-list > li > strong
+{
+    font-size: 1.1rem;
 }
 
 .publication-content
@@ -328,16 +361,41 @@ section[id]
         grid-template-columns: minmax(0, 1fr);
         gap: 1rem;
     }
+}
+
+@media (max-width: 36rem)
+{
+    body
+    {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr) auto;
+    }
+
+    .columns
+    {
+        grid-column: 1;
+        grid-row: 2;
+    }
 
     header
     {
+        width: 100%;
+        min-height: auto;
         align-items: flex-start;
         flex-direction: column;
+        grid-column: 1;
+        grid-row: 1;
     }
 
     header ul
     {
         margin-top: 0;
+    }
+
+    footer
+    {
+        grid-column: 1;
+        grid-row: 3;
     }
 }
 
